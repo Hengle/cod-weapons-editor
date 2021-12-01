@@ -1134,9 +1134,7 @@
             this.searchBox = new System.Windows.Forms.TextBox();
             this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.advancedMode = new System.Windows.Forms.CheckBox();
-            this.convertCod5 = new System.Windows.Forms.Button();
             this.label425 = new System.Windows.Forms.Label();
             this.fileFormatL = new System.Windows.Forms.Label();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
@@ -1144,6 +1142,8 @@
             this.menuFileOpen = new System.Windows.Forms.MenuItem();
             this.menuFileSave = new System.Windows.Forms.MenuItem();
             this.menuFileSaveAs = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.menuRecentFile = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
@@ -1151,14 +1151,9 @@
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.MenuToolsMods = new System.Windows.Forms.MenuItem();
             this.menuToolsRaw = new System.Windows.Forms.MenuItem();
-            this.menuToolsConvert = new System.Windows.Forms.MenuItem();
-            this.menuToolsUpdates = new System.Windows.Forms.MenuItem();
             this.menuToolsReset = new System.Windows.Forms.MenuItem();
-            this.menuToolsRepair = new System.Windows.Forms.MenuItem();
             this.menuToolsAbout = new System.Windows.Forms.MenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.menuItem5 = new System.Windows.Forms.MenuItem();
-            this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabControl4.SuspendLayout();
@@ -1540,9 +1535,9 @@
             this.fireTypeT.FormattingEnabled = true;
             this.fireTypeT.Items.AddRange(new object[] {
             "3-Round Burst",
+            "Double Barrel",
             "Full Auto",
-            "Single Shot",
-            "Double Barrel"});
+            "Single Shot"});
             this.fireTypeT.Location = new System.Drawing.Point(115, 279);
             this.fireTypeT.Name = "fireTypeT";
             this.fireTypeT.Size = new System.Drawing.Size(133, 21);
@@ -1564,9 +1559,9 @@
             this.impactTypeT.FormattingEnabled = true;
             this.impactTypeT.Items.AddRange(new object[] {
             "bullet_ap",
+            "bullet_explode",
             "bullet_large",
             "bullet_small",
-            "bullet_explode",
             "grenade_bounce",
             "grenade_explode",
             "mortar_shell",
@@ -11658,18 +11653,6 @@
             this.label46.TabIndex = 12;
             this.label46.Text = "Created by [UGX] treminaor";
             // 
-            // linkLabel1
-            // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(811, 81);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(102, 13);
-            this.linkLabel1.TabIndex = 2;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "www.ugx-mods.com";
-            this.linkLabel1.VisitedLinkColor = System.Drawing.Color.Blue;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
-            // 
             // advancedMode
             // 
             this.advancedMode.AutoSize = true;
@@ -11680,16 +11663,6 @@
             this.advancedMode.Text = "Advanced Mode";
             this.advancedMode.UseVisualStyleBackColor = true;
             this.advancedMode.CheckedChanged += new System.EventHandler(this.advancedMode_CheckedChanged);
-            // 
-            // convertCod5
-            // 
-            this.convertCod5.Location = new System.Drawing.Point(796, 254);
-            this.convertCod5.Name = "convertCod5";
-            this.convertCod5.Size = new System.Drawing.Size(128, 23);
-            this.convertCod5.TabIndex = 14;
-            this.convertCod5.Text = "Convert BO1 to CoD5";
-            this.convertCod5.UseVisualStyleBackColor = true;
-            this.convertCod5.Click += new System.EventHandler(this.convertCod5_Click);
             // 
             // label425
             // 
@@ -11754,6 +11727,18 @@
             this.menuFileSaveAs.Text = "Save As";
             this.menuFileSaveAs.Click += new System.EventHandler(this.menuFileSaveAs_Click);
             // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 3;
+            this.menuItem5.Text = "Open New Instance";
+            this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 4;
+            this.menuItem6.Text = "Open Current in New Instance";
+            this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
+            // 
             // menuItem4
             // 
             this.menuItem4.Index = 5;
@@ -11781,10 +11766,7 @@
             this.menuItem2.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.MenuToolsMods,
             this.menuToolsRaw,
-            this.menuToolsConvert,
-            this.menuToolsUpdates,
             this.menuToolsReset,
-            this.menuToolsRepair,
             this.menuToolsAbout});
             this.menuItem2.Text = "Tools";
             // 
@@ -11821,29 +11803,15 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // menuItem5
-            // 
-            this.menuItem5.Index = 3;
-            this.menuItem5.Text = "Open New Instance";
-            this.menuItem5.Click += new System.EventHandler(this.menuItem5_Click);
-            // 
-            // menuItem6
-            // 
-            this.menuItem6.Index = 4;
-            this.menuItem6.Text = "Open Current in New Instance";
-            this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
-            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 560);
+            this.ClientSize = new System.Drawing.Size(936, 559);
             this.Controls.Add(this.fileFormatL);
             this.Controls.Add(this.label425);
-            this.Controls.Add(this.convertCod5);
             this.Controls.Add(this.advancedMode);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.label45);
             this.Controls.Add(this.searchBox);
@@ -12195,7 +12163,6 @@
         private System.Windows.Forms.TextBox worldLastShotEjectEffectT;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.RichTextBox hideTagsT;
         private System.Windows.Forms.RichTextBox notetrackSoundMapT;
@@ -13045,7 +13012,6 @@
         private System.Windows.Forms.Label label424;
         private System.Windows.Forms.Label label281;
         private System.Windows.Forms.CheckBox advancedMode;
-        private System.Windows.Forms.Button convertCod5;
         private System.Windows.Forms.Label label425;
         private System.Windows.Forms.Label fileFormatL;
         private System.Windows.Forms.MainMenu mainMenu1;
@@ -13057,11 +13023,8 @@
         private System.Windows.Forms.MenuItem menuItem2;
         private System.Windows.Forms.MenuItem MenuToolsMods;
         private System.Windows.Forms.MenuItem menuToolsRaw;
-        private System.Windows.Forms.MenuItem menuToolsConvert;
-        private System.Windows.Forms.MenuItem menuToolsUpdates;
         private System.Windows.Forms.MenuItem menuToolsAbout;
         private System.Windows.Forms.MenuItem menuToolsReset;
-        private System.Windows.Forms.MenuItem menuToolsRepair;
         private System.Windows.Forms.MenuItem menuItem4;
         private System.Windows.Forms.MenuItem menuRecentFile;
         private System.Windows.Forms.MenuItem menuItem3;

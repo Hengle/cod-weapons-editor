@@ -50,7 +50,6 @@ namespace WeaponsEditor__
             toolTip1.ShowAlways = true;
 
             toolTip1.SetToolTip(advancedMode, "Enable all weaponSettings for current file. \nThe WaW engine sometimes allows unusual settings from one weaponClass to be used on another, even if not shown in Asset Manager. \nThis also allows you to convert a weapon to a different weaponClass because you can add the needed additional settings.");
-            toolTip1.SetToolTip(convertCod5, "If you have opened a BO1 weaponFile, press this button to remove some BO1-only settings from the currently open file. It also renames some of the edited BO1 names to their CoD4/5 versions (ex. adsZoomFov1 to adsZoomFov). \nThis will usually make the weaponFile work in CoD5 without any further action.");
             toolTip1.SetToolTip(searchBox, "Jump to a specific setting by typing at least the first new characters of its name. Use your arrowkeys to select from the list if necessary, then hit Enter to jump to the setting.");
 
             //Tooltip Definitions
@@ -535,8 +534,6 @@ namespace WeaponsEditor__
             var sentControl = (Control)sender;
             if (sentControl is Control)
                 toolTip1.ToolTipTitle = sentControl.Name.Substring(0, sentControl.Name.Length - 1);
-            if (sentControl.Name == "convertCod5")
-                toolTip1.ToolTipTitle = "Convert BO1 weaponFile to CoD5 Format";
             if (sentControl.Name == "advancedMode")
                 toolTip1.ToolTipTitle = "Advanced Mode";
             if (sentControl.Name == "searchBox")
@@ -596,7 +593,7 @@ namespace WeaponsEditor__
             {
                 foreach (Control control in controls)
                 {
-                    if ((control is TextBox || control is RichTextBox || control is ComboBox || control is CheckBox) && control.Name != "searchBox" && control.Name != "consoleT" && control.Name != "loadedFileT" && control.Name != "advancedMode" && control.Name != "convertCod5") //some specific stuff that doesn't need to be disabled
+                    if ((control is TextBox || control is RichTextBox || control is ComboBox || control is CheckBox) && control.Name != "searchBox" && control.Name != "consoleT" && control.Name != "loadedFileT" && control.Name != "advancedMode") //some specific stuff that doesn't need to be disabled
                         control.Enabled = false;
                     if (control is TextBox)
                         (control as TextBox).Clear();
@@ -613,6 +610,7 @@ namespace WeaponsEditor__
 
             func(Controls);
         }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             if (keyData == (Keys.Control | Keys.O))
@@ -1036,7 +1034,7 @@ namespace WeaponsEditor__
                 {
                     foreach (Control control in savedControlsState)
                     {
-                        if (control.Name == "searchBox" || control.Name == "consoleT" || control.Name == "loadedFileT" || control.Name == "advancedMode" || control.Name == "convertCod5") //some specific stuff that doesn't need to be disabled
+                        if (control.Name == "searchBox" || control.Name == "consoleT" || control.Name == "loadedFileT" || control.Name == "advancedMode") //some specific stuff that doesn't need to be disabled
                             continue;
 
                         if (control is TextBox)
@@ -1082,8 +1080,6 @@ namespace WeaponsEditor__
             Console.WriteLine(path);
             if (Directory.Exists(path))
                 System.Diagnostics.Process.Start(path);
-            else
-                RelocateCoDWaW();
         }
         private void spFolder_Click(object sender, EventArgs e)
         {
@@ -1091,12 +1087,6 @@ namespace WeaponsEditor__
 
             if (Directory.Exists(path))
                 System.Diagnostics.Process.Start(path);
-            else
-                RelocateCoDWaW();
-        }
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("http://ugx-mods.com/forum");
         }
         private string GetRootFolder()
         {
@@ -1112,20 +1102,6 @@ namespace WeaponsEditor__
             if (path[path.Length - 1] != '\\')
                 path += "\\";
             return path;
-        }
-        private void RelocateCoDWaW()
-        {
-            //Prompt them to find their root folder.
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.ShowNewFolderButton = false;
-            fbd.Description = "Your CoDWaW installation could not be found. Please navigate to it. The location will be saved to your registry so that other programs can correctly find your installation.";
-            DialogResult result = fbd.ShowDialog();
-            if (result == System.Windows.Forms.DialogResult.Cancel)
-                return;
-            string path = fbd.SelectedPath;
-            //guy didn't install the game legitimately, create the key for him to prevent problems with less-intelligent programs :P
-            Microsoft.Win32.RegistryKey newkey = Microsoft.Win32.Registry.LocalMachine.CreateSubKey("SOFTWARE\\Activision\\Call of Duty WAW");
-            newkey.SetValue("InstallPath", path);
         }
         #endregion
 
@@ -1311,51 +1287,6 @@ namespace WeaponsEditor__
             else
                 fileFormatL.Text = "N/A";
         }
-        private void convertCod5_Click(object sender, EventArgs e)
-        {
-            bool deleteRest = false;
-            bool deletedAny = false;
-            int count = 0;
-            foreach (KeyValuePair<string, string> setting in sourceDict.ToList())
-            {
-                if (setting.Key == "adsZoomFov2")
-                {
-                    sourceDict["adsZoomFov"] = setting.Value;
-                    adsZoomFovT.Enabled = true;
-                    adsZoomFovT.Text = setting.Value;
-                }
-                foreach (string bo1setting in miscBO1Settings.ToList())
-                {
-                    if (setting.Key == bo1setting)
-                    {
-                        deletedAny = true;
-                        count++;
-                        sourceDict.Remove(setting.Key);
-                    }
-                    else if (setting.Key == "playerAnimType")
-                    {
-                        if (sourceDict.ContainsKey("playerAnimType"))
-                        {
-                            sourceDict["playerAnimType"] = "autorifle";
-                            playerAnimTypeT.Text = "autorifle";
-                        }
-                    }
-                }
-                //The first in the list of ikHandle trash.
-                if (setting.Key == "ikLeftHandOffsetF")
-                    deleteRest = true;
-                if (deleteRest)
-                    sourceDict.Remove(setting.Key);
-            }
-            if (deleteRest || deletedAny)
-            {
-                anyUnsavedChanges = true;
-                fileFormatL.Text = "CoD5";
-                consoleOut("File successfully converted. Remember to check the playerAnimType and save your changes!");
-            }
-            else
-                consoleOut("Error: Not a BO1 weaponFile, conversion failed.");
-        }
 
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
@@ -1367,7 +1298,7 @@ namespace WeaponsEditor__
                                  MessageBoxButtons.YesNo,
                                  MessageBoxIcon.Question);
 
-                e.Cancel = (result == DialogResult.No);
+                e.Cancel = result == DialogResult.No;
             }
         }
 
@@ -1411,22 +1342,12 @@ namespace WeaponsEditor__
             spFolder_Click(sender, e);
         }
 
-        private void menuToolsConvert_Click(object sender, EventArgs e)
-        {
-            convertCod5_Click(sender, e);
-        }
-
         private void menuToolsReset_Click(object sender, EventArgs e)
         {
             Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\\UGX\\WeaponsEditor", true);
             if (key != null)
                 key.DeleteValue("OverwriteConfirmation");
             consoleOut("File Overwrite Warning preference reset. You will be asked next time you try to overwrite a file.");
-        }
-
-        private void menuToolsRepair_Click(object sender, EventArgs e)
-        {
-            RelocateCoDWaW();
         }
 
         private void menuToolsAbout_Click(object sender, EventArgs e)
