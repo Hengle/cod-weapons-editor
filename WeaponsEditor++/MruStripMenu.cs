@@ -307,7 +307,7 @@ namespace JWC
 			else if (number == 9)
 				return "1&0" + "  " + entryname;
 			else
-				return (number + 1) + "  " + entryname;
+				return number + 1 + "  " + entryname;
 		}
 
 		protected void FixupPrefixes(int startNumber)
@@ -333,7 +333,7 @@ namespace JWC
 		/// <param labelName="maxLength">The maximum number of characters to be displayed.</param>
 		/// <remarks>Shortens a pathname by either removing consecutive components of a path
 		/// and/or by removing characters from the end of the filename and replacing
-		/// then with three elipses (...)
+		/// then with three ellipses (...)
 		/// <para>In all cases, the root of the passed path will be preserved in it's entirety.</para>
 		/// <para>If a UNC path is used or the pathname and maxLength are particularly short,
 		/// the resulting path may be longer than maxLength.</para>
@@ -369,7 +369,7 @@ namespace JWC
 					}
 				}
 			}
-			else if ((root.Length + 4 + elements[filenameIndex].Length) > maxLength) // pathname is just a root and filename
+			else if (root.Length + 4 + elements[filenameIndex].Length > maxLength) // pathname is just a root and filename
 			{
 				root += "...\\";
 
@@ -377,7 +377,7 @@ namespace JWC
 				if (len < 6)
 					return root + elements[filenameIndex];
 
-				if ((root.Length + 6) >= maxLength)
+				if (root.Length + 6 >= maxLength)
 				{
 					len = 3;
 				}

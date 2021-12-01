@@ -1539,11 +1539,10 @@
             this.fireTypeT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fireTypeT.FormattingEnabled = true;
             this.fireTypeT.Items.AddRange(new object[] {
-            "2-Round Burst",
             "3-Round Burst",
-            "4-Round Burst",
             "Full Auto",
-            "Single Shot"});
+            "Single Shot",
+            "Double Barrel"});
             this.fireTypeT.Location = new System.Drawing.Point(115, 279);
             this.fireTypeT.Name = "fireTypeT";
             this.fireTypeT.Size = new System.Drawing.Size(133, 21);
@@ -1567,6 +1566,7 @@
             "bullet_ap",
             "bullet_large",
             "bullet_small",
+            "bullet_explode",
             "grenade_bounce",
             "grenade_explode",
             "mortar_shell",
@@ -1700,9 +1700,11 @@
             this.inventoryTypeT.FormattingEnabled = true;
             this.inventoryTypeT.Items.AddRange(new object[] {
             "altmode",
+            "exclusive",
             "item",
             "offhand",
-            "primary"});
+            "primary",
+            "scavenger"});
             this.inventoryTypeT.Location = new System.Drawing.Point(115, 117);
             this.inventoryTypeT.Name = "inventoryTypeT";
             this.inventoryTypeT.Size = new System.Drawing.Size(133, 21);
@@ -1723,20 +1725,20 @@
             this.playerAnimTypeT.FormattingEnabled = true;
             this.playerAnimTypeT.Items.AddRange(new object[] {
             "autorifle",
+            "briefcase",
             "c4",
-            "explosive",
-            "gas",
             "grenade",
             "hold",
-            "mg",
+            "laptop",
+            "m203",
             "none",
             "other",
             "pistol",
-            "radio",
+            "riotshield",
             "rocketlauncher",
             "smg",
             "sniper",
-            "turret"});
+            "throwingknife"});
             this.playerAnimTypeT.Location = new System.Drawing.Point(115, 90);
             this.playerAnimTypeT.Name = "playerAnimTypeT";
             this.playerAnimTypeT.Size = new System.Drawing.Size(133, 21);
@@ -8907,7 +8909,9 @@
             this.stickinessT.FormattingEnabled = true;
             this.stickinessT.Items.AddRange(new object[] {
             "Don\'t stick",
+            "Knife",
             "Stick to all",
+            "Stick to all, orient to surface",
             "Stick to ground",
             "Stick to ground, maintain yaw"});
             this.stickinessT.Location = new System.Drawing.Point(149, 24);
@@ -9182,12 +9186,9 @@
             this.projExplosionTypeT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.projExplosionTypeT.FormattingEnabled = true;
             this.projExplosionTypeT.Items.AddRange(new object[] {
-            "fire",
             "flashbang",
             "grenade",
-            "heavyexplosion",
-            "napalmblob",
-            "napalmbloblight",
+            "heavy explosive",
             "none",
             "rocket",
             "smoke"});
@@ -10680,7 +10681,6 @@
             this.guidedMissileTypeT.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.guidedMissileTypeT.FormattingEnabled = true;
             this.guidedMissileTypeT.Items.AddRange(new object[] {
-            "Ballistic",
             "Hellfire",
             "Javelin",
             "None",
@@ -11800,33 +11800,15 @@
             this.menuToolsRaw.Text = "raw/weapons Folder";
             this.menuToolsRaw.Click += new System.EventHandler(this.menuToolsRaw_Click);
             // 
-            // menuToolsConvert
-            // 
-            this.menuToolsConvert.Index = 2;
-            this.menuToolsConvert.Text = "Convert BO1 to CoD5";
-            this.menuToolsConvert.Click += new System.EventHandler(this.menuToolsConvert_Click);
-            // 
-            // menuToolsUpdates
-            // 
-            this.menuToolsUpdates.Index = 3;
-            this.menuToolsUpdates.Text = "Check for Updates";
-            this.menuToolsUpdates.Click += new System.EventHandler(this.menuToolsUpdates_Click);
-            // 
             // menuToolsReset
             // 
-            this.menuToolsReset.Index = 4;
+            this.menuToolsReset.Index = 2;
             this.menuToolsReset.Text = "Reset File Overwrite Dialog";
             this.menuToolsReset.Click += new System.EventHandler(this.menuToolsReset_Click);
             // 
-            // menuToolsRepair
-            // 
-            this.menuToolsRepair.Index = 5;
-            this.menuToolsRepair.Text = "CoDWaW Registry Repair Tool";
-            this.menuToolsRepair.Click += new System.EventHandler(this.menuToolsRepair_Click);
-            // 
             // menuToolsAbout
             // 
-            this.menuToolsAbout.Index = 6;
+            this.menuToolsAbout.Index = 3;
             this.menuToolsAbout.Text = "About";
             this.menuToolsAbout.Click += new System.EventHandler(this.menuToolsAbout_Click);
             // 
