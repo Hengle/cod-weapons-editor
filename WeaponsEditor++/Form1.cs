@@ -21,7 +21,6 @@ namespace WeaponsEditor__
         Dictionary<string, string> sourceDict;
         bool fileReadingComplete = false;
         List<Control> savedControlsState = new List<Control>(); //save which controls are disabled in case the user decides he wants to turn off advanced mode.
-        List<string> miscBO1Settings = new List<string> { "DualWieldWeapon", "doGibbing", "maxGibDistance", "DualMag", "ammoCountClipRelative", "continuousFire", "fullMetalJacket", "hollowPoint", "rapidFirE", "isCarriedKillstreakWeapon", "useAltTagFlash", "jamFireTime", "lowReadyInTime", "lowReadyLoopTime", "lowReadyOutTime", "contFireInTime", "contFireLoopTime", "contFireOutTime", "dtpInTime", "slideInTime", "dtpLoopTime", "dtpOutTime", "adsZoomSound", "lowReadyInAnim", "lowReadyLoopAnim", "lowReadyOutAnim", "contFireInAnim", "contFireLoopAnim", "contFireOutAnim", "dtp_in", "dtp_loop", "dtp_out", "dtp_empty_in", "dtp_empty_loop", "dtp_empty_out", "slide_in", "sprintCameraAnim", "dtpInCameraAnim", "dtpLoopCameraAnim", "dtpOutCameraAnim", "mantleCameraAnim", "useOnlyAltWeaoponHideTagsInAltMode", "dualWield", "reloadAnimRight", "reloadQuickAnim", "sprintInEmptyAnim", "sprintLoopEmptyAnim", "sprintOutEmptyAnim", "mantleAnim", "meleeChargeRange", "useAsMelee", "AdditionalMeleeModel", "lastFireTime", "reloadQuickTime", "reloadQuickAddTime", "isCameraSensor", "isAcousticSensor", "adsZoomFov1", "adsZoomFov2", "adsZoomFov3", "adsOverlayAlphaScale", "grenadeWeapon", "reloadWhileAds", "noThirdPersonDropsOrRaises", "lowReadyOfsF", "lowReadyOfsR", "lowReadyOfsU", "lowReadyRotP", "lowReadyRotY", "lowReadyRotR", "dtpOfsF", "dtpOfsR", "dtpOfsU", "dtpRotP", "dtpRotY", "dtpRotR", "dtpBobH", "dtpBobV", "dtpScale", "mantleOfsF", "mantleOfsR", "mantleOfsU", "mantleRotP", "mantleRotY", "mantleRotR", "slideOfsF", "slideOfsR", "slideOfsU", "slideRotP", "slideRotY", "slideRotR", "strafeMoveF", "strafeMoveR", "strafeMoveU", "strafeRotP", "strafeRotY", "strafeRotR", "indicatorRadius", "projectileSpeedRelativeUp", "showIndicator", "noPing", "lockOnRadius", "lockOnSpeed", "reloadRumble", "stackFire", "stackFireSpread", "stackFireAccuracyDecay", "stackSound", "ikLeftHandOffsetF", "ikLeftHandOffsetR", "ikLeftHandOffsetU", "ikLeftHandRotationP", "ikLeftHandRotationY", "ikLeftHandRotationR", "ikLeftHandProneOffsetF", "ikLeftHandProneOffsetR", "ikLeftHandProneOffsetU", "ikLeftHandProneRotationP", "ikLeftHandProneRotationY", "ikLeftHandProneRotationR", "ikLeftHandUiViewerOffsetF", "ikLeftHandUiViewerOffsetR", "ikLeftHandUiViewerOffsetU", "ikLeftHandUiViewerRotationP", "ikLeftHandUiViewerRotationY", "ikLeftHandUiViewerRotationR", "retrievable", "dieOnRespawn", "noCrumpleMissile", "forceBounce", "useDroppedModelAsStowed", "noQuickDropWhenEmpty", "keepCrosshairWhenADS", "useAntiLagRewind", "parentWeaponName" };
 
         bool anyUnsavedChanges = false;
         string anyUnSavedChanges_text = "";
@@ -921,7 +920,6 @@ namespace WeaponsEditor__
                         }
                     }
                 }
-                detectCoDVersion();
                 fileReadingComplete = true;
                 #endregion
 
@@ -1091,6 +1089,11 @@ namespace WeaponsEditor__
         private string GetRootFolder()
         {
             Microsoft.Win32.RegistryKey key = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("SOFTWARE\\Activision\\Call of Duty WAW");
+            if (key == null)
+            {
+                return string.Empty;
+            }
+
             string path = Convert.ToString(key.GetValue("InstallPath"));
             if (string.IsNullOrWhiteSpace(path)) path = "";
             return GetActualDirectoryPath(path);
@@ -1263,29 +1266,6 @@ namespace WeaponsEditor__
         {
             if (loadedFileT.Text == "") return;
             readAndSaveStats(false);
-        }
-        private void detectCoDVersion()
-        {
-            bool BO1 = false;
-
-            foreach (KeyValuePair<string, string> setting in sourceDict.ToList())
-            {
-                foreach (string bo1setting in miscBO1Settings.ToList())
-                {
-                    if (setting.Key == bo1setting)
-                    {
-                        BO1 = true;
-                        break;
-                    }
-                }
-            }
-
-            if (BO1)
-                fileFormatL.Text = "BO1";
-            else if (!BO1)
-                fileFormatL.Text = "CoD5";
-            else
-                fileFormatL.Text = "N/A";
         }
 
         protected override void OnFormClosing(FormClosingEventArgs e)

@@ -1135,8 +1135,6 @@
             this.label45 = new System.Windows.Forms.Label();
             this.label46 = new System.Windows.Forms.Label();
             this.advancedMode = new System.Windows.Forms.CheckBox();
-            this.label425 = new System.Windows.Forms.Label();
-            this.fileFormatL = new System.Windows.Forms.Label();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuFileOpen = new System.Windows.Forms.MenuItem();
@@ -11664,27 +11662,6 @@
             this.advancedMode.UseVisualStyleBackColor = true;
             this.advancedMode.CheckedChanged += new System.EventHandler(this.advancedMode_CheckedChanged);
             // 
-            // label425
-            // 
-            this.label425.AutoSize = true;
-            this.label425.Location = new System.Drawing.Point(798, 280);
-            this.label425.Name = "label425";
-            this.label425.Size = new System.Drawing.Size(89, 13);
-            this.label425.TabIndex = 15;
-            this.label425.Text = "Detected Format:";
-            // 
-            // fileFormatL
-            // 
-            this.fileFormatL.AutoSize = true;
-            this.fileFormatL.Location = new System.Drawing.Point(889, 280);
-            this.fileFormatL.MaximumSize = new System.Drawing.Size(35, 15);
-            this.fileFormatL.MinimumSize = new System.Drawing.Size(35, 15);
-            this.fileFormatL.Name = "fileFormatL";
-            this.fileFormatL.Size = new System.Drawing.Size(35, 15);
-            this.fileFormatL.TabIndex = 16;
-            this.fileFormatL.Text = "N/A";
-            this.fileFormatL.TextAlign = System.Drawing.ContentAlignment.TopRight;
-            // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
@@ -11809,8 +11786,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(936, 559);
-            this.Controls.Add(this.fileFormatL);
-            this.Controls.Add(this.label425);
             this.Controls.Add(this.advancedMode);
             this.Controls.Add(this.label46);
             this.Controls.Add(this.label45);
@@ -13012,8 +12987,6 @@
         private System.Windows.Forms.Label label424;
         private System.Windows.Forms.Label label281;
         private System.Windows.Forms.CheckBox advancedMode;
-        private System.Windows.Forms.Label label425;
-        private System.Windows.Forms.Label fileFormatL;
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuFileOpen;
